@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/dist/output.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
+    <title>Absence-App</title>
+</head>
+
+<body class="bg-gray-900">
+    <main>
+        <div class="grid place-items-center min-h-screen">
+            <img class="absolute w-screen opacity-60" src="/svg/grid-pattern.svg" alt="grid-pattern">
+            <div class="text-white grid md:grid-cols-2 sm:grid-cols-1 my-10">
+                <div class="flex flex-col bg-slate-900 p-8 rounded-lg h-[30em] border border-slate-600 relative">
+                    <label class="pb-4 text-white" for="name">Employee Name:</label>
+                    <input id="employee-name" class="rounded-sm w-80 p-2 ring-2 ring-blue-500/50 ring-offset-2
+                         ring-offset-slate-800 active:ring-blue-500 hover:ring-blue-500
+                             focus:ring-2 focus:ring-blue-500 focus:outline-none bg-slate-800 text-white" type="text"
+                        id="name">
+                    <p id="employee-id" class="pt-6">Employee ID: <span>-</span></p>
+                    <div class="absolute bottom-6">
+                        <button id="clock-button"
+                            class="mt-6 bg-slate-800 text-left p-2 w-auto rounded-lg ring-2 ring-blue-400 ring-offset-2 ring-offset-slate-900">Clock
+                            In</button>
+                    </div>
+                </div>
+                <div id="attendance-log"
+                    class="bg-slate-800 text-white w-[24em] h-[30em] p-6 rounded-lg relative overflow-hidden overflow-y-auto border border-slate-700">
+                    <h2 class="pb-4">Attendance Log: </h2>
+                    <ul id="log-list">
+
+                    </ul>
+                    <div class="absolute bottom-6 flex gap-4">
+                        <button id="generate-pdf"
+                            class=" mt-6 bg-red-600 hover:bg-red-800 text-left text-white p-2 w-30 fon rounded-lg">Generate
+                            PDF</button>
+                        <button id="clear-btn"
+                            class="mt-6 bg-blue-500 hover:bg-blue-600 text-white p-2 w-30 fon rounded-lg">Clear</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="script.js"></script>
+</body>
+
+</html>
