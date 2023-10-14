@@ -6,12 +6,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/dist/output.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
+    <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
     <title>Absence-App</title>
 </head>
 
 <body class="bg-gray-900 overflow-y-hidden">
+    <header>
+        <nav class="bg-neutral-900 border border-slate-700 p-3">
+            <ul class="flex justify-between px-4 items-center text-white">
+                <li>DISKOMINFOSTANDI</li>
+                <li>
+                    <a href="https://github.com/vintech05/attendance-tracker">
+                        <div class="text-white scale-150">
+                            <i class="lni lni-github-original cursor-pointer"></i></i>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
     <main>
-        <div class="grid place-items-center min-h-screen">
+        <div class="grid place-items-center min-h-screen -mt-10">
             <img class="absolute w-screen opacity-60" src="/svg/grid.svg" alt="grid-pattern">
             <div class="text-white grid md:grid-cols-2 sm:grid-cols-1 my-10">
                 <div class="flex flex-col bg-slate-900 p-8 rounded-lg h-[30em] border border-slate-600 relative">
