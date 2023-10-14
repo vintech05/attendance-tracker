@@ -9,17 +9,17 @@
     <title>Absence-App</title>
 </head>
 
-<body class="bg-gray-900">
+<body class="bg-gray-900 overflow-y-hidden">
     <main>
         <div class="grid place-items-center min-h-screen">
-            <img class="absolute w-screen opacity-60" src="/svg/grid-pattern.svg" alt="grid-pattern">
+            <img class="absolute w-screen opacity-60" src="/svg/grid.svg" alt="grid-pattern">
             <div class="text-white grid md:grid-cols-2 sm:grid-cols-1 my-10">
                 <div class="flex flex-col bg-slate-900 p-8 rounded-lg h-[30em] border border-slate-600 relative">
                     <label class="pb-4 text-white" for="name">Employee Name:</label>
                     <input id="employee-name" class="rounded-sm w-80 p-2 ring-2 ring-blue-500/50 ring-offset-2
                          ring-offset-slate-800 active:ring-blue-500 hover:ring-blue-500
                              focus:ring-2 focus:ring-blue-500 focus:outline-none bg-slate-800 text-white" type="text"
-                        id="name">
+                        id="name" placeholder="insert your ID here..">
                     <p id="employee-id" class="pt-6">Employee ID: <span>-</span></p>
                     <div class="absolute bottom-6">
                         <button id="clock-button"
