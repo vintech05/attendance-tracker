@@ -7,6 +7,21 @@ const employeeID = document.getElementById('employee-id');
 const generatePDFButton = document.getElementById('generate-pdf');
 const clearBtn = document.getElementById('clear-btn');
 
+const hours = document.getElementById('hours');
+const minutes = document.getElementById('minutes');
+const seconds = document.getElementById('seconds');
+
+
+setInterval(() => {
+
+    let currentTime = new Date();
+
+    hours.textContent = (currentTime.getHours()<10?'0':'') + currentTime.getHours();
+    minutes.textContent = (currentTime.getMinutes()<10?'0':'') + currentTime.getMinutes();
+    seconds.textContent = (currentTime.getSeconds()<10?'0':'') + currentTime.getSeconds();
+
+}, 1000)
+
 
 
 window.jsPDF = window.jspdf.jsPDF;
@@ -35,7 +50,7 @@ clockButton.addEventListener('click', () => {
 });
 
 clearBtn.addEventListener('click', () => {
-    logList.innerHTML = '';
+    logList.textContent = '';
     employeeInput.value = '';
     employeeID.textContent = 'Employee ID: ';
     clockButton.textContent = 'Clock In';
