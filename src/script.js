@@ -23,9 +23,10 @@ setInterval(() => {
 }, 1000)
 
 
-
 window.jsPDF = window.jspdf.jsPDF;
 const doc = new jsPDF();
+
+const maxLogEntries = 15;
 
 employeeInput.addEventListener('change', () => {
     employeeID.textContent = 'Employee ID: ' + employeeInput.value;
@@ -47,6 +48,11 @@ clockButton.addEventListener('click', () => {
         clockButton.textContent = 'Clock Out';
         isClockedIn = true;
      }
+
+     const logEntries = logList.getElementsByTagName("li");
+     if (logEntries.length >= maxLogEntries) {
+         logList.removeChild(logEntries[0]); 
+     }
 });
 
 clearBtn.addEventListener('click', () => {
@@ -55,20 +61,38 @@ clearBtn.addEventListener('click', () => {
     employeeID.textContent = 'Employee ID: ';
     clockButton.textContent = 'Clock In';
     isClockedIn = false;
+
+    window.location.reload();
+});
+
+employeeInput.addEventListener("input", () => {
+    const name = employeeInput.value.trim(); 
+    employeeID.textContent = name;
+    
+    if (name) {
+        clockButton.removeAttribute("disabled");
+    } else {
+        clockButton.setAttribute("disabled", "true");
+    }
 });
 
 
 generatePDFButton.addEventListener("click", () => {
-    const logEntries = Array.from(logList.getElementsByTagName("li"));
+    const logEntries = Array.from(logList.querySelectorAll("li"));
 
-    const maxLogEntries = 10;
+    const maxLogEntries = 15;
 
     doc.addPage();
 
-    logEntries.slice(0, maxLogEntries).forEach((entry, index) => {
-        doc.text(10, 10 + index * 10, entry.textContent);
-    });
+    logEntries.forEach((entry, index) => {
+        if (yPos + 10 > 280) { // Adjust 280 to the appropriate value
+            doc.addPage();
+            yPos = 10;
+        }
 
+        doc.text(10, yPos, entry.textContent);
+        yPos += 10;
+    });
 
     doc.save("attendance_log.pdf");
 });
