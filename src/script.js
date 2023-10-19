@@ -1,4 +1,3 @@
-
 let isClockedIn = false;
 const logList = document.getElementById('log-list');
 const clockButton = document.getElementById('clock-button');
@@ -6,6 +5,7 @@ const employeeInput = document.getElementById('employee-name');
 const employeeID = document.getElementById('employee-id');
 const generatePDFButton = document.getElementById('generate-pdf');
 const clearBtn = document.getElementById('clear-btn');
+const requestOffBtn = document.getElementById("request-off-btn");
 
 const hours = document.getElementById('hours');
 const minutes = document.getElementById('minutes');
@@ -26,7 +26,7 @@ setInterval(() => {
 window.jsPDF = window.jspdf.jsPDF;
 const doc = new jsPDF();
 
-const maxLogEntries = 15;
+const maxLogEntries = 10;
 
 employeeInput.addEventListener('change', () => {
     employeeID.textContent = 'Employee ID: ' + employeeInput.value;
@@ -55,6 +55,19 @@ clockButton.addEventListener('click', () => {
      }
 });
 
+requestOffBtn.addEventListener("click", () => {
+    const name = prompt("Enter your name:");
+    const date = prompt("Enter the date for your time off (e.g., YYYY-MM-DD):");
+    const reason = prompt("Enter the reason for your time off:");
+
+    if (date && reason && name) {
+        alert(`${name} has requested for time off on ${date} due to ${reason} has been submitted.`);
+    } else {
+        alert("Please enter the required information to request time off.");
+    }
+});
+
+
 clearBtn.addEventListener('click', () => {
     logList.textContent = '';
     employeeInput.value = '';
@@ -80,12 +93,12 @@ employeeInput.addEventListener("input", () => {
 generatePDFButton.addEventListener("click", () => {
     const logEntries = Array.from(logList.querySelectorAll("li"));
 
-    const maxLogEntries = 15;
+    const maxLogEntries = 10;
 
     doc.addPage();
 
     logEntries.forEach((entry, index) => {
-        if (yPos + 10 > 280) { // Adjust 280 to the appropriate value
+        if (yPos + 10 > 280) { 
             doc.addPage();
             yPos = 10;
         }
@@ -96,3 +109,23 @@ generatePDFButton.addEventListener("click", () => {
 
     doc.save("attendance_log.pdf");
 });
+
+
+//animation section
+
+var tl = gsap.timeline();
+
+tl.to("#title", { 
+    opacity: 1,
+     y: -5,
+    duration: 1 });
+
+tl.to("#subtitle", { 
+    opacity: 1,
+     y: -5,
+    duration: 2 });
+
+tl.to("#clockTime", { 
+    opacity: 1,
+    duration: 2 });
+

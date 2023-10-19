@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/dist/output.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
     <title>Absence-App</title>
 </head>
@@ -28,16 +29,27 @@
     <img class="absolute w-screen min-h-max opacity-60" src="/svg/grid.svg" alt="grid-pattern">
     <main>
         <div class="grid place-items-center h-screen text-white">
-            <div class="flex flex-col gap-20">
-                <h1 class="md:text-8xl sm:w-full sm:text-5xl xs:text-4xl">Selamat Datang!</h1>
-                <div id=" clockTime" class="flex justify-center text-2xl ">
+            <div class="flex flex-col justify-center items-center gap-20">
+                <h1 id="title" class="md:text-8xl sm:w-full sm:text-5xl xs:text-4xl opacity-0 translate-y-10">Selamat
+                    Datang!</h1>
+                <p id="subtitle" class="-mt-12 opacity-0">Sudahkah absen hari ini?</p>
+                <div id="clockTime" class="flex justify-center text-2xl opacity-0">
                     <div
-                        class="bg-white/5 backdrop-blur-lg rounded-full font-semibold py-4 px-6 hover:bg-white hover:backdrop-brightness-95 hover:text-black transition-all">
-                        <span id="hours">00</span>
+                        class="flex gap-5 bg-white/5 backdrop-blur-lg rounded-full font-semibold py-4 px-10 hover:bg-white hover:backdrop-brightness-95 hover:text-black transition-all">
+                        <div class="flex flex-col items-center">
+                            <span id="hours" class="md:text-3xl sm:text-xl">00</span>
+                            <p class="text-sm font-normal">JAM</p>
+                        </div>
                         <span>:</span>
-                        <span id="minutes">00</span>
+                        <div class="flex flex-col items-center">
+                            <span id="minutes" class="md:text-3xl sm:text-xl">00</span>
+                            <p class="text-sm font-normal">MENIT</p>
+                        </div>
                         <span>:</span>
-                        <span id="seconds">00</span>
+                        <div class="flex flex-col items-center">
+                            <span id="seconds" class="md:text-3xl sm:text-xl">00</span>
+                            <p class="text-sm font-normal">DETIK</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -46,23 +58,26 @@
             <div class=" text-white grid md:grid-cols-2 sm:grid-cols-1 my-10">
                 <div class="bg-slate-900 p-8 rounded-lg h-[30em] border border-slate-600 relative">
                     <div class="flex flex-col">
-                        <label class="pb-4 text-white" for="name">Employee Name:</label>
+                        <label class="pb-4 text-white" for="name">Employee Name: <span
+                                class="text-red-600">*</span></label>
                         <input id="employee-name" class="rounded-sm w-80 p-2 ring-2 ring-blue-500/50 ring-offset-2
                          ring-offset-slate-800 active:ring-blue-500 hover:ring-blue-500
                              focus:ring-2 focus:ring-blue-500 focus:outline-none bg-slate-800 text-white" type="text"
                             id="name" placeholder="insert your ID here.." required>
                         <p id="employee-id" class="pt-6">Employee ID: <span>-</span></p>
-                        <div class="absolute bottom-6">
+                        <div class="absolute bottom-6 flex gap-4 items-center">
                             <button id="clock-button"
                                 class="mt-6 bg-slate-800 text-left p-2 w-auto rounded-lg ring-2 ring-blue-400 ring-offset-2 ring-offset-slate-900"
                                 disabled>Clock
                                 In</button>
+                            <button id="request-off-btn"
+                                class="mt-6 bg-slate-800 text-left p-2 w-auto rounded-lg ring-2 ring-orange-500 ring-offset-2 ring-offset-slate-900">Request</button>
                         </div>
                     </div>
                 </div>
                 <div id="attendance-log"
                     class="bg-slate-800 text-white w-[24em] h-[30em] p-6 rounded-lg relative overflow-hidden overflow-y-auto border border-slate-700">
-                    <h2 class="pb-4">Attendance Log: </h2>
+                    <h2 class="pb-4">Attendance Log: <span class="text-slate-600">(Batas Maksimum: 10)</span></h2>
                     <ul id="log-list">
 
                     </ul>
@@ -77,7 +92,7 @@
             </div>
         </div>
     </main>
-    <script src="script.js"></script>
+    <script type="module" src="script.js"></script>
 </body>
 
 </html>

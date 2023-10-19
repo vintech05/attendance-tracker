@@ -9,6 +9,10 @@ module.exports = {
         lg: '976px',
         xl: '1440px',
     },
+    // colors: {
+    //   'bg-white': '#F5F5F5',
+    //   'clr-white': 'ffffff',
+    // },
     extend: {
       fontFamily: {
         sans: ['DM Sans', 'sans-serif'],
