@@ -12,6 +12,27 @@ const minutes = document.getElementById('minutes');
 const seconds = document.getElementById('seconds');
 
 
+const moonIcon = document.getElementById("moon");
+const sunIcon = document.getElementById("sun");
+
+function toggleTheme() {
+    const darkToggle = document.querySelector(".toggle")
+  
+    if (darkToggle) {
+      darkToggle.classList.toggle('dark');
+      moonIcon.classList.toggle('hidden');
+    sunIcon.classList.toggle('hidden');
+    } else {
+        darkToggle.classList.toggle('dark');
+       moonIcon.classList.toggle('hidden');
+    sunIcon.classList.toggle('hidden');
+    }
+  }
+  
+
+moonIcon.addEventListener('click', toggleTheme);
+sunIcon.addEventListener('click', toggleTheme);
+
 setInterval(() => {
 
     let currentTime = new Date();
@@ -26,11 +47,43 @@ setInterval(() => {
 window.jsPDF = window.jspdf.jsPDF;
 const doc = new jsPDF();
 
-const maxLogEntries = 10;
+const maxLogEntries = 6;
 
 employeeInput.addEventListener('change', () => {
     employeeID.textContent = 'Employee ID: ' + employeeInput.value;
 });
+
+employeeInput.addEventListener("input", () => {
+    
+    if (employeeInput.value == "" || employeeInput.value == null) {
+        clockButton.setAttribute("disabled");
+        generatePDFButton.setAttribute("disabled")
+    } else {
+        clockButton.removeAttribute("disabled");
+        generatePDFButton.removeAttribute("disable");
+    }
+});
+
+generatePDFButton.addEventListener("click", () => {
+    const logEntries = Array.from(logList.querySelectorAll("li"));
+
+    const maxLogEntries = 6;
+
+    doc.addPage();
+
+    logEntries.forEach((entry, index) => {
+        if (yPos + 6 > 280) { 
+            doc.addPage();
+            yPos = 6;
+        }
+
+        doc.text(6, yPos, entry.textContent);
+        yPos += 6;
+    });
+
+    doc.save("attendance_log.pdf");
+});
+
 
 clockButton.addEventListener('click', () => {
     if(isClockedIn) {
@@ -57,13 +110,13 @@ clockButton.addEventListener('click', () => {
 
 requestOffBtn.addEventListener("click", () => {
     const name = prompt("Enter your name:");
-    const date = prompt("Enter the date for your time off (e.g., YYYY-MM-DD):");
-    const reason = prompt("Enter the reason for your time off:");
+    const date = prompt("Enter the date for your day off (e.g., YYYY-MM-DD):");
+    const reason = prompt("Enter the reason for your day off:");
 
     if (date && reason && name) {
-        alert(`${name} has requested for time off on ${date} due to ${reason} has been submitted.`);
+        alert(`${name} has requested for day off on ${date} due to ${reason} has been submitted.`);
     } else {
-        alert("Please enter the required information to request time off.");
+        alert("Please enter the required information to request day off.");
     }
 });
 
@@ -74,40 +127,6 @@ clearBtn.addEventListener('click', () => {
     employeeID.textContent = 'Employee ID: ';
     clockButton.textContent = 'Clock In';
     isClockedIn = false;
-
-    window.location.reload();
-});
-
-employeeInput.addEventListener("input", () => {
-    const name = employeeInput.value.trim(); 
-    employeeID.textContent = name;
-    
-    if (name) {
-        clockButton.removeAttribute("disabled");
-    } else {
-        clockButton.setAttribute("disabled", "true");
-    }
-});
-
-
-generatePDFButton.addEventListener("click", () => {
-    const logEntries = Array.from(logList.querySelectorAll("li"));
-
-    const maxLogEntries = 10;
-
-    doc.addPage();
-
-    logEntries.forEach((entry, index) => {
-        if (yPos + 10 > 280) { 
-            doc.addPage();
-            yPos = 10;
-        }
-
-        doc.text(10, yPos, entry.textContent);
-        yPos += 10;
-    });
-
-    doc.save("attendance_log.pdf");
 });
 
 
@@ -122,7 +141,6 @@ tl.to("#title", {
 
 tl.to("#subtitle", { 
     opacity: 1,
-     y: -5,
     duration: 2 });
 
 tl.to("#clockTime", { 
