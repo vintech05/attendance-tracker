@@ -22,10 +22,29 @@ function toggleTheme() {
       darkToggle.classList.toggle('dark');
       moonIcon.classList.toggle('hidden');
     sunIcon.classList.toggle('hidden');
+    if (darkToggle.classList.contains('dark')) {
+        localStorage.setItem('theme', 'dark');
+      } else {
+        localStorage.setItem('theme', 'light');
+      }
     } else {
         darkToggle.classList.toggle('dark');
        moonIcon.classList.toggle('hidden');
     sunIcon.classList.toggle('hidden');
+    }
+  }
+
+  window.onload = function() {
+    const storedTheme = localStorage.getItem('theme');
+    const darkToggle = document.querySelector(".toggle");
+    if (storedTheme === 'dark') {
+      darkToggle.classList.add('dark');
+      moonIcon.classList.add('hidden');
+      sunIcon.classList.remove('hidden');
+    } else {
+      darkToggle.classList.remove('dark');
+      moonIcon.classList.remove('hidden');
+      sunIcon.classList.add('hidden');
     }
   }
   
