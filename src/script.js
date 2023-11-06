@@ -6,6 +6,8 @@ const employeeID = document.getElementById('employee-id');
 const generatePDFButton = document.getElementById('generate-pdf');
 const clearBtn = document.getElementById('clear-btn');
 const requestOffBtn = document.getElementById("request-off-btn");
+let yPos = 6;
+
 
 const hours = document.getElementById('hours');
 const minutes = document.getElementById('minutes');
